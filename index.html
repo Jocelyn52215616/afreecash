@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page d'échange</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+/* CSS existant pour la page de connexion */
+body {
+    font-family: sans-serif;
+    background: linear-gradient(to top, #1a2a6c, #1C1F24, #1C1F24); /* Fond dégradé */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+h1 {
+    text-align: center;
+    color: #007bff; /* Bleu */
+    min-height: 620px;
+}
+
+p {
+    font-size: 12px;
+    text-align: center;
+    color: #ffffff; /* Bleu */
+}
+
+
+h2 {
+    text-align: center;
+    color: #ffffff; /* Gris foncé */
+    margin-bottom: 30px;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #4ea8e4);
+    clip-path: polygon(0 0, 120% 0, 50% 75%, 0 20%);
+}
+
+/* CSS spécifique au formulaire d'échange */
+.exchange-container {
+    background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    width: 75%;
+    max-width: 500px;
+    
+}
+
+
+.exchange-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+}
+
+.exchange-form-group label {
+    margin-bottom: 5px;
+    color: white;
+
+}
+
+.exchange-input-group {
+    display: flex;
+    align-items: stretch;
+}
+
+
+select, input[type="number"] {
+                width: 70%;
+                padding: 10px;
+                border: 1px solid #ffffff;
+                border-radius: 5px;
+                margin-right: 5px;
+                background-color: rgb(240, 240, 240);
+            }
+
+
+.exchange-container select {
+    appearance: none;
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+}
+
+.exchange-container #have {
+    background-image: url("image.png");
+}
+
+.exchange-container #want {
+    background-image: url("chemin/vers/votre/logo-perfect-money.png");
+}
+
+.exchange-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 20px 0;
+}
+
+.exchange-icon img {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    z-index: 1;
+    transition: transform 0.3s ease-in-out; /* Ajout de la transition pour la rotation */
+}
+
+.exchange-icon.flipped img { /* Classe ajoutée lors du clic */
+    transform: rotate(360deg);
+}
+
+
+.exchange-icon::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #26bbe0;
+    z-index: 0;
+}
+
+.exchange-container button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+}
+
+
+.exchange-container select:focus,
+.exchange-container input[type="number"]:focus {
+    outline: none; /* Supprimer le contour par défaut */
+}
+
+/* Styles pour les contours personnalisés */
+.vente:focus {
+    border-color: red !important; /* Contour rouge pour la vente */
+}
+
+.achat:focus {
+    border-color: green !important; /* Contour vert pour l'achat */
+}
+#receptionCard button[type="submit"] {  /* Style pour le bouton "Enregistrer" */
+    display: block; /* Permet de centrer le bouton avec margin auto */
+    width: 75%;
+    margin: 10px auto; /* Centrer horizontalement et verticalement */
+    margin-top: 10px;
+
+}
+
+.info-icon {
+    text-align: center; /* Centrer le contenu de .info-icon */
+}
+
+
+#receptionCard input[type="text"] {
+    display: block; /* Permet de centrer l'input avec margin auto */
+    width: 75%; /* Ajustez la largeur selon vos besoins */
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px auto; /* Centrer horizontalement et ajouter une marge verticale */
+    box-sizing: border-box; 
+    margin-top: 20px;
+}
+
+.info-icon {
+    display: flex;
+    flex-direction: column; /* Empiler l'icône et le texte verticalement */
+    align-items: center; /* Centrer horizontalement */
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+}
+.info-icon i {
+    font-size: 20px;
+    margin-right: 10px;
+    color: #bc2020;
+    margin: 10px auto; /* Centrer horizontalement et verticalement */
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
+
+.back-button {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    padding: 8px 12px;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
+
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+/* Styles spécifiques à la carte de dépôt */
+#depositCard {
+    display: none; 
+}
+
+#depositCard .exchange-input-group {
+    flex-direction: row; /* Alignement horizontal */
+    align-items: center;
+    gap: 0.5px; /* Espacement entre les éléments */
+}
+
+#depositCard input[type="text"] {
+    display: block;
+    width: calc(100% - 40px); /* Prend toute la largeur sauf l'espace pour le bouton de copie */
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center; /* Alignement du texte à gauche */
+    border-radius: 5px;
+    margin: 5px auto;
+    margin-bottom: 2px;
+    box-sizing: border-box; 
+}
+
+#depositCard .copy-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px; /* Ajustement de la taille du bouton */
+}
+
+#depositCard .copy-button i {
+    font-size: 16px;
+}
+
+#depositCard .info-icon {
+    text-align: left;
+    margin-top: 5px;
+        margin: 10px auto;
+
+}
+
+#depositCard .info-icon i {
+    margin-right: 5px;
+}
+
+#depositCard .info-icon p {
+    margin: 0;
+}
+
+
+li {
+    font-size: 12px;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 2px;  
+}
+#depositCard h2 {
+    margin-top: 5px; /* Environ 0.3 cm */
+}
+
+#depositCard .exchange-form-group h3 {
+    margin-top: 0; /* Supprime la marge supérieure par défaut */
+    
+}
+</style>
+</head>
+<body>
+    <div class="background"></div>
+    <h1>Afreecash</h1> 
+    <div class="exchange-container" id="exchangeCard"> 
+        <h2>Exchange</h2>
+
+        <div class="exchange-form-group">
+            <label for="have">J'ai</label>
+            <div class="exchange-input-group">
+                <select id="have">
+                    <option value="mtn-money">MTN Money</option>
+                    <option value="orange-money">Orange Money</option>
+                    <option value="moov-money">Moov Money</option>
+                </select>
+                <input type="number" id="have-amount" value="0.00">
+            </div>
+        </div>
+        <div class="exchange-icon">
+            <img src="chemin/vers/votre/logo-echange.png" alt="Logo échange">
+        </div>
+
+        <div class="exchange-form-group">
+            <label for="want">Je veux</label>
+            <div class="exchange-input-group">
+                <select id="want">
+                    <option value="perfect-money">Perfect Money</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+                <input type="number" id="want-amount" value="0.00">
+            </div>
+        </div>
+        <button type="submit" id="exchangeButton">Echanger</button>
+    </div>
+
+    <div class="exchange-container" id="receptionCard" style="display: none;"> 
+        <h2>ADRESSE DE RÉCEPTION</h2>
+        <p id="receptionMessage"></p> 
+        <input type="text" id="perfectMoneyAddress" value="" placeholder="Ex: U43952795">
+        <button type="submit" id="saveButton">ENREGISTRER</button>
+        <div class="info-icon">
+            <i class="fas fa-info-circle"></i>
+            <p>Si il s'agit de votre première transaction perfectmoney, demandez l'aide d'un utilisateur expérimenté pour savoir où trouver votre adresse Perfectmoney.</p> 
+            <p>Les transactions perfectmoney sont irréversibles. Si vous renseignez une mauvaise adresse, les fonds seront perdus définitivement.</p>
+        </div>
+        <button class="back-button" id="backButton"><i class="fas fa-arrow-left"></i> Retour</button>
+    </div>
+
+    <div class="exchange-container" id="depositCard" style="display: none;">
+        <h2 class="depot">DÉPÔT</h2>
+        <div class="exchange-form-group">
+            <h3>PAYER PAR BNB (BEP20)</h3>
+            <p>Envoyez 0.023 BNB à l'adresse</p>
+            <div class="exchange-input-group">
+                <input type="text" id="depositAddress" value="0xDF2F8FDec40Ee...748c79df22a7898" readonly>
+                <button class="copy-button"><i class="fas fa-copy"></i></button>
+            </div>
+        </div>
+        <div class="exchange-form-group">
+            <p>À la fin du paiement, entrez l'ID de transaction afin de valider le paiement.</p>
+            <input type="text" id="transactionId" placeholder="Entrez le hash (ID) de la transaction">
+        </div>
+        <button type="submit" id="validateButton">VALIDER MON PAIEMENT</button>
+        <div class="info-icon">
+            <p>Important :</p>
+            <ul>
+                <li>Envoyez seulement des BNB sur cette adresse de dépôt.</li>
+                <li>L'envoi de monnaies ou de Token autres que des BNB à cette adresse peut entraîner la perte de votre dépôt.</li>
+                <li>Ceci est une adresse BEP20. Assurez-vous d'utiliser le réseau BEP20 en effectuant la dépôt.</li>
+            </ul>
+        </div>
+        <button class="back-button" id="backButtons"><i class="fas fa-arrow-left"></i> Retour</button>
+
+    </div>
+</body>
+<script>
+const saveButton = document.getElementById('saveButton');
+const depositCard = document.getElementById('depositCard');
+
+const receptionMessage = document.getElementById('receptionMessage');
+const backButton = document.getElementById('backButton');
+const backButtons = document.getElementById('backButtons');
+
+const exchangeIcon = document.querySelector('.exchange-icon');
+const haveSelect = document.getElementById('have');
+const wantSelect = document.getElementById('want');
+const haveAmountInput = document.getElementById('have-amount');
+const wantAmountInput = document.getElementById('want-amount');
+const exchangeCard = document.getElementById('exchangeCard');
+const receptionCard = document.getElementById('receptionCard');
+const exchangeButton = document.getElementById('exchangeButton');
+
+exchangeIcon.addEventListener('click', () => {
+    exchangeIcon.classList.toggle('flipped');
+
+    // Stocker les options du premier menu déroulant
+    const haveOptions = Array.from(haveSelect.options);
+    const wantOptions = Array.from(wantSelect.options);
+
+    // Échanger les options
+    haveSelect.innerHTML = ''; // Vider le premier menu
+    wantOptions.forEach(option => {
+        haveSelect.add(option.cloneNode(true)); // Cloner les options du deuxième menu
+    });
+
+    wantSelect.innerHTML = ''; // Vider le deuxième menu
+    haveOptions.forEach(option => {
+        wantSelect.add(option); // Ajouter les options du premier menu
+    });
+});
+
+
+
+function updateInputBorders() {
+    const haveValue = haveSelect.value;
+    const wantValue = wantSelect.value;
+
+    haveSelect.classList.remove('vente', 'achat');
+    wantSelect.classList.remove('vente', 'achat');
+    haveAmountInput.classList.remove('vente', 'achat');
+    wantAmountInput.classList.remove('vente', 'achat');
+
+    if (haveValue === 'mtn-money' || haveValue === 'orange-money' || haveValue === 'moov-money' || haveValue === 'tmoney') {
+        haveSelect.classList.add('vente');
+        haveAmountInput.classList.add('vente');
+    } else {
+        haveSelect.classList.add('achat');
+        haveAmountInput.classList.add('achat');
+    }
+
+    if (wantValue === 'mtn-money' || wantValue === 'orange-money' || wantValue === 'moov-money' || wantValue === 'tmoney') {
+        wantSelect.classList.add('vente');
+        wantAmountInput.classList.add('vente');
+    } else {
+        wantSelect.classList.add('achat');
+        wantAmountInput.classList.add('achat');
+    }
+}
+
+
+exchangeButton.addEventListener('click', () => {
+    const haveAmount = document.getElementById('have-amount').value;
+    const wantOption = document.getElementById('want').value;
+    receptionMessage.textContent = `Vous avez demandé à acheter ${haveAmount} ${wantOption.toUpperCase()}. À quelle adresse ${wantOption.toUpperCase()} voulez-vous les recevoir ?`;
+    exchangeCard.style.display = 'none';
+    receptionCard.style.display = 'block';
+});
+
+backButton.addEventListener('click', () => {
+    receptionCard.style.display = 'none';
+    exchangeCard.style.display = 'block';
+});
+
+backButtons.addEventListener('click', () => {
+    depositCard.style.display = 'none';
+    receptionCard.style.display = 'block';
+
+});
+
+
+saveButton.addEventListener('click', () => {
+    receptionCard.style.display = 'none';
+    depositCard.style.display = 'block';
+});
+// Appeler la fonction au chargement initial et lors du changement des menus déroulants
+updateInputBorders();
+haveSelect.addEventListener('change', updateInputBorders);
+wantSelect.addEventListener('change', updateInputBorders);
+</script>
+</body>
+</html>
