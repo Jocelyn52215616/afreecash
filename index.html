@@ -26,7 +26,17 @@ p {
     text-align: center;
     color: #ffffff; /* Bleu */
 }
-
+h4 {
+    position: relative;    
+    color: #ffffff; /* Gris foncé */
+    margin-bottom: 30px;
+    top: 20px;
+}
+h2.depot{
+    position: relative;
+    top: 30px;
+    margin-bottom: 10px;
+}
 
 h2 {
     text-align: center;
@@ -223,6 +233,8 @@ select, input[type="number"] {
 }
 
 #depositCard .exchange-input-group {
+    position: relative;
+    left: 12px;
     flex-direction: row; /* Alignement horizontal */
     align-items: center;
     gap: 0.5px; /* Espacement entre les éléments */
@@ -241,6 +253,7 @@ select, input[type="number"] {
 }
 
 #depositCard .copy-button {
+    color: #ffffff;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -333,7 +346,7 @@ li {
     <div class="exchange-container" id="depositCard" style="display: none;">
         <h2 class="depot">DÉPÔT</h2>
         <div class="exchange-form-group">
-            <h3>PAYER PAR BNB (BEP20)</h3>
+            <h4>PAYER PAR BNB (BEP20)</h4>
             <p>Envoyez 0.023 BNB à l'adresse</p>
             <div class="exchange-input-group">
                 <input type="text" id="depositAddress" value="0xDF2F8FDec40Ee...748c79df22a7898" readonly>
@@ -347,11 +360,7 @@ li {
         <button type="submit" id="validateButton">VALIDER MON PAIEMENT</button>
         <div class="info-icon">
             <p>Important :</p>
-            <ul>
-                <li>Envoyez seulement des BNB sur cette adresse de dépôt.</li>
-                <li>L'envoi de monnaies ou de Token autres que des BNB à cette adresse peut entraîner la perte de votre dépôt.</li>
-                <li>Ceci est une adresse BEP20. Assurez-vous d'utiliser le réseau BEP20 en effectuant la dépôt.</li>
-            </ul>
+            <p>Envoyez exactement "l'actif ou monaie choie " et le montant exact , sinon vous risquer de pedre vos actifs </p>
         </div>
         <button class="back-button" id="backButtons"><i class="fas fa-arrow-left"></i> Retour</button>
 
