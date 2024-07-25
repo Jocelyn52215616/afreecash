@@ -14,16 +14,6 @@ body {
     align-items: center;
     min-height: 100vh; 
     margin: 0;
-    
-}
-
-footer {
-    margin-top: auto;       /* Pousse le footer vers le bas */
-    background-color: rgba(0, 0, 0, 0.2); /* Fond semi-transparent pour le footer */
-    padding: 15px 0;        /* Ajoute un peu de padding au footer */
-    width: 100%; 
-    position: fixed;
-    bottom: 0;
 }
 
 h1 {
@@ -306,55 +296,29 @@ li {
     margin-top: 0; /* Supprime la marge supérieure par défaut */
     
 }
-.error-message {
-    color: rgb(236, 88, 88);
-    font-size: 11px;
-    margin-top: 5px;
-}
-
-
-.social-icons {
-    display: flex;
-    justify-content: center; /* Centrer les icônes horizontalement */
-    align-items: center;    /* Centrer les icônes verticalement */
-    margin-top: 20px;       /* Espace entre la carte et les icônes */
-}
-
-.social-icons a {
-    margin: 0 10px;          /* Espacement de 1cm entre les icônes */
-}
-
-.social-icons img {
-    width: 40px;             /* Taille des icônes */
-    height: 40px;
-    border-radius: 50%;     /* Forme circulaire */
-    object-fit: cover;      /* Pour que l'image remplisse le cercle */
-}
-
-
 </style>
 </head>
 <body>
     <div class="background"></div>
     <h1>Afreecash</h1> 
-    <div class="exchange-container" id="exchangeCard">
+    <div class="exchange-container" id="exchangeCard"> 
         <h2>Exchange</h2>
-    
+
         <div class="exchange-form-group">
             <label for="have">J'ai</label>
             <div class="exchange-input-group">
                 <select id="have">
-                    <option value="T-money">MTN Money</option>
-                    <option value="Flooz-money">Moov Money</option>
+                    <option value="mtn-money">MTN Money</option>
+                    <option value="orange-money">Orange Money</option>
+                    <option value="moov-money">Moov Money</option>
                 </select>
                 <input type="number" id="have-amount" value="0.00">
             </div>
-            <p id="have-error" class="error-message"></p> 
         </div>
         <div class="exchange-icon">
             <img src="chemin/vers/votre/logo-echange.png" alt="Logo échange">
         </div>
-    
+
         <div class="exchange-form-group">
             <label for="want">Je veux</label>
             <div class="exchange-input-group">
@@ -364,11 +328,10 @@ li {
                 </select>
                 <input type="number" id="want-amount" value="0.00">
             </div>
-            <p id="want-error" class="error-message"></p> 
         </div>
         <button type="submit" id="exchangeButton">Echanger</button>
     </div>
-    
+
     <div class="exchange-container" id="receptionCard" style="display: none;"> 
         <h2>ADRESSE DE RÉCEPTION</h2>
         <p id="receptionMessage"></p> 
@@ -404,28 +367,15 @@ li {
         <button class="back-button" id="backButtons"><i class="fas fa-arrow-left"></i> Retour</button>
 
     </div>
-    <p>Rejoingnez-nous sur nos différentes réseaux sociaux </p>
-    <div class="social-icons">
-        <a href="lien_vers_facebook" target="_blank">
-            <img src="telegram.jpg" alt="Facebook">
-        </a>
-        <a href="lien_vers_twitter" target="_blank">
-            <img src="youtube.png" alt="Twitter">
-        </a>
-        <a href="lien_vers_instagram" target="_blank">
-            <img src="spport.png" alt="Instagram">
-        </a>
-    </div>
-    
-    
-
 </body>
 <script>
 const saveButton = document.getElementById('saveButton');
 const depositCard = document.getElementById('depositCard');
+
 const receptionMessage = document.getElementById('receptionMessage');
 const backButton = document.getElementById('backButton');
 const backButtons = document.getElementById('backButtons');
+
 const exchangeIcon = document.querySelector('.exchange-icon');
 const haveSelect = document.getElementById('have');
 const wantSelect = document.getElementById('want');
@@ -434,68 +384,6 @@ const wantAmountInput = document.getElementById('want-amount');
 const exchangeCard = document.getElementById('exchangeCard');
 const receptionCard = document.getElementById('receptionCard');
 const exchangeButton = document.getElementById('exchangeButton');
-let originalHeight = window.innerHeight; // Sauvegarde de la hauteur initiale
-
-
-exchangeButton.addEventListener('click', function () {
-  if (validateAmounts()) {
-    // Les montants sont valides, continuer le processus d'échange
-    const haveAmount = haveAmountInput.value;
-    const wantOption = wantSelect.value;
-    receptionMessage.textContent = `Vous avez demandé à acheter ${haveAmount} ${wantOption.toUpperCase()}. À quelle adresse ${wantOption.toUpperCase()} voulez-vous les recevoir ?`;
-    exchangeCard.style.display = 'none';
-    receptionCard.style.display = 'block';
-  }
-});
-
-function validateAmounts() {
-  const haveAmount = parseFloat(document.getElementById('have-amount').value);
-  const wantAmount = parseFloat(document.getElementById('want-amount').value);
-  const haveError = document.getElementById('have-error');
-  const wantError = document.getElementById('want-error');
-
-  haveError.textContent = ''; // Effacer les messages d'erreur précédents
-  wantError.textContent = '';
-
-  if (isNaN(haveAmount) || haveAmount <= 0) {
-    haveError.textContent = "Veuillez entrer un montant valide supérieur à zéro.";
-    return false;
-  }
-  if (isNaN(wantAmount) || wantAmount <= 0) {
-    wantError.textContent = "Veuillez entrer un montant valide supérieur à zéro.";
-    return false;
-  }
-  return true;
-}
-
-// Gestion de l'affichage du clavier
-window.addEventListener('resize', function() {
-  if (window.innerHeight < originalHeight) { // Clavier ouvert
-    exchangeCard.style.position = 'absolute';
-    exchangeCard.style.top = '50px'; 
-  } else { // Clavier fermé
-    exchangeCard.style.position = 'fixed';
-    exchangeCard.style.top = '50%';
-    exchangeCard.style.transform = 'translate(-50%, -50%)';
-  }
-});
-
-// Gestionnaires d'événements pour les boutons de retour
-backButton.addEventListener('click', () => {
-  receptionCard.style.display = 'none';
-  exchangeCard.style.display = 'block';
-});
-
-backButtons.addEventListener('click', () => {
-  depositCard.style.display = 'none';
-  receptionCard.style.display = 'block';
-});
-
-// Gestionnaire d'événement pour le bouton "Enregistrer"
-saveButton.addEventListener('click', () => {
-  receptionCard.style.display = 'none';
-  depositCard.style.display = 'block';
-});
 
 exchangeIcon.addEventListener('click', () => {
     exchangeIcon.classList.toggle('flipped');
@@ -516,7 +404,8 @@ exchangeIcon.addEventListener('click', () => {
     });
 });
 
-// Fonction pour mettre à jour les couleurs des bordures en fonction des devises sélectionnées
+
+
 function updateInputBorders() {
     const haveValue = haveSelect.value;
     const wantValue = wantSelect.value;
@@ -543,14 +432,47 @@ function updateInputBorders() {
     }
 }
 
-// Appeler updateInputBorders au chargement initial pour définir les bonnes couleurs
-updateInputBorders();
 
-// Ajouter des écouteurs d'événements pour mettre à jour les couleurs lors du changement de devise
+exchangeButton.addEventListener('click', () => {
+    const haveAmount = document.getElementById('have-amount').value;
+    const wantOption = document.getElementById('want').value;
+    receptionMessage.textContent = `Vous avez demandé à acheter ${haveAmount} ${wantOption.toUpperCase()}. À quelle adresse ${wantOption.toUpperCase()} voulez-vous les recevoir ?`;
+    exchangeCard.style.display = 'none';
+    receptionCard.style.display = 'block';
+});
+
+backButton.addEventListener('click', () => {
+    receptionCard.style.display = 'none';
+    exchangeCard.style.display = 'block';
+});
+
+backButtons.addEventListener('click', () => {
+    depositCard.style.display = 'none';
+    receptionCard.style.display = 'block';
+
+});
+
+
+saveButton.addEventListener('click', () => {
+    receptionCard.style.display = 'none';
+    depositCard.style.display = 'block';
+});
+
+window.addEventListener('resize', function() {
+  const exchangeCard = document.getElementById('exchangeCard');
+  if (window.innerHeight < originalHeight) { // Le clavier est ouvert
+    exchangeCard.style.position = 'absolute';
+    exchangeCard.style.top = '50px'; // Ajustez la valeur selon vos besoins
+  } else { // Le clavier est fermé
+    exchangeCard.style.position = 'fixed';
+    exchangeCard.style.top = '50%';
+    exchangeCard.style.transform = 'translate(-50%, -50%)';
+  }
+});
+// Appeler la fonction au chargement initial et lors du changement des menus déroulants
+updateInputBorders();
 haveSelect.addEventListener('change', updateInputBorders);
 wantSelect.addEventListener('change', updateInputBorders);
-</script>
-
 
 </script>
 </body>
