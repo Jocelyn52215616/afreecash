@@ -301,24 +301,24 @@ li {
 <body>
     <div class="background"></div>
     <h1>Afreecash</h1> 
-    <div class="exchange-container" id="exchangeCard"> 
+    <div class="exchange-container" id="exchangeCard">
         <h2>Exchange</h2>
-
+    
         <div class="exchange-form-group">
             <label for="have">J'ai</label>
             <div class="exchange-input-group">
                 <select id="have">
-                    <option value="mtn-money">MTN Money</option>
-                    <option value="orange-money">Orange Money</option>
-                    <option value="moov-money">Moov Money</option>
+                    <option value="T-money">MTN Money</option>
+                    <option value="Flooz-money">Moov Money</option>
                 </select>
                 <input type="number" id="have-amount" value="0.00">
             </div>
+            <p id="have-error" class="error-message"></p> 
         </div>
         <div class="exchange-icon">
             <img src="chemin/vers/votre/logo-echange.png" alt="Logo échange">
         </div>
-
+    
         <div class="exchange-form-group">
             <label for="want">Je veux</label>
             <div class="exchange-input-group">
@@ -328,10 +328,11 @@ li {
                 </select>
                 <input type="number" id="want-amount" value="0.00">
             </div>
+            <p id="want-error" class="error-message"></p> 
         </div>
         <button type="submit" id="exchangeButton">Echanger</button>
     </div>
-
+    
     <div class="exchange-container" id="receptionCard" style="display: none;"> 
         <h2>ADRESSE DE RÉCEPTION</h2>
         <p id="receptionMessage"></p> 
@@ -367,6 +368,19 @@ li {
         <button class="back-button" id="backButtons"><i class="fas fa-arrow-left"></i> Retour</button>
 
     </div>
+    <p>Rejoingnez-nous sur nos différentes réseaux sociaux </p>
+    <div class="social-icons">
+        <a href="lien_vers_facebook" target="_blank">
+            <img src="telegram.jpg" alt="Facebook">
+        </a>
+        <a href="lien_vers_twitter" target="_blank">
+            <img src="youtube.png" alt="Twitter">
+        </a>
+        <a href="lien_vers_instagram" target="_blank">
+            <img src="spport.png" alt="Instagram">
+        </a>
+    </div>
+    
 </body>
 <script>
 const saveButton = document.getElementById('saveButton');
