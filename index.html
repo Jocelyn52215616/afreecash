@@ -8,13 +8,14 @@
 /* CSS existant pour la page de connexion */
 body {
     font-family: sans-serif;
-    background: linear-gradient(to top, #1a2a6c, #1C1F24, #1C1F24); /* Fond dégradé */
+    background: linear-gradient(to top, #1a2a6c, #1C1F24, #1C1F24); 
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+    min-height: 100vh; 
     margin: 0;
 }
+
 h1 {
     text-align: center;
     color: #007bff; /* Bleu */
@@ -22,7 +23,7 @@ h1 {
 }
 
 p {
-    font-size: 12px;
+    font-size: 13px;
     text-align: center;
     color: #ffffff; /* Bleu */
 }
@@ -34,7 +35,7 @@ h4 {
 }
 h2.depot{
     position: relative;
-    top: 30px;
+    top: 35px;
     margin-bottom: 10px;
 }
 
@@ -56,19 +57,20 @@ h2 {
 
 /* CSS spécifique au formulaire d'échange */
 .exchange-container {
+    overflow: hidden;
     background-color: rgba(255, 255, 255, 0.1); /* Fond semi-transparent */
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: absolute;
+    position: fixed; /* Fixer la position du conteneur */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: 1;
+    height: auto; /* Permettre au conteneur de s'adapter au contenu */
+    max-height: 90vh; /* Limiter la hauteur maximale pour éviter le débordement */
     width: 75%;
-    max-width: 500px;
-    
 }
+
 
 
 .exchange-form-group {
@@ -455,10 +457,23 @@ saveButton.addEventListener('click', () => {
     receptionCard.style.display = 'none';
     depositCard.style.display = 'block';
 });
+
+window.addEventListener('resize', function() {
+  const exchangeCard = document.getElementById('exchangeCard');
+  if (window.innerHeight < originalHeight) { // Le clavier est ouvert
+    exchangeCard.style.position = 'absolute';
+    exchangeCard.style.top = '50px'; // Ajustez la valeur selon vos besoins
+  } else { // Le clavier est fermé
+    exchangeCard.style.position = 'fixed';
+    exchangeCard.style.top = '50%';
+    exchangeCard.style.transform = 'translate(-50%, -50%)';
+  }
+});
 // Appeler la fonction au chargement initial et lors du changement des menus déroulants
 updateInputBorders();
 haveSelect.addEventListener('change', updateInputBorders);
 wantSelect.addEventListener('change', updateInputBorders);
+
 </script>
 </body>
 </html>
