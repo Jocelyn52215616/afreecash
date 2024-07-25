@@ -418,10 +418,11 @@ function validateAmounts() {
 
 // Gestion de l'affichage du clavier
 window.addEventListener('resize', function() {
-  if (window.innerHeight < originalHeight) { // Clavier ouvert
+  const exchangeCard = document.getElementById('exchangeCard');
+  if (window.innerHeight < originalHeight) { // Le clavier est ouvert
     exchangeCard.style.position = 'absolute';
-    exchangeCard.style.top = '50px'; 
-  } else { // Clavier fermé
+    exchangeCard.style.top = '50px'; // Ajustez la valeur selon vos besoins
+  } else { // Le clavier est fermé
     exchangeCard.style.position = 'fixed';
     exchangeCard.style.top = '50%';
     exchangeCard.style.transform = 'translate(-50%, -50%)';
