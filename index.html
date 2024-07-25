@@ -430,18 +430,6 @@ function validateAmounts() {
   return true;
 }
 
-// Gestion de l'affichage du clavier
-window.addEventListener('resize', function() {
-  const exchangeCard = document.getElementById('exchangeCard');
-  if (window.innerHeight < originalHeight) { // Le clavier est ouvert
-    exchangeCard.style.position = 'absolute';
-    exchangeCard.style.top = '50px'; // Ajustez la valeur selon vos besoins
-  } else { // Le clavier est fermé
-    exchangeCard.style.position = 'fixed';
-    exchangeCard.style.top = '50%';
-    exchangeCard.style.transform = 'translate(-50%, -50%)';
-  }
-});
 
 // Gestionnaires d'événements pour les boutons de retour
 backButton.addEventListener('click', () => {
@@ -506,6 +494,17 @@ function updateInputBorders() {
     }
 }
 
+window.addEventListener('resize', function() {
+  const exchangeCard = document.getElementById('exchangeCard');
+  if (window.innerHeight < originalHeight) { // Le clavier est ouvert
+    exchangeCard.style.position = 'absolute';
+    exchangeCard.style.top = '50px'; // Ajustez la valeur selon vos besoins
+  } else { // Le clavier est fermé
+    exchangeCard.style.position = 'fixed';
+    exchangeCard.style.top = '50%';
+    exchangeCard.style.transform = 'translate(-50%, -50%)';
+  }
+});
 // Appeler updateInputBorders au chargement initial pour définir les bonnes couleurs
 updateInputBorders();
 
