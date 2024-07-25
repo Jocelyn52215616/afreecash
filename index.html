@@ -4,8 +4,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page d'échange</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<style>
-/* CSS existant pour la page de connexion */
 body {
     font-family: sans-serif;
     background: linear-gradient(to top, #1a2a6c, #1C1F24, #1C1F24); 
@@ -14,7 +12,12 @@ body {
     align-items: center;
     min-height: 100vh; 
     margin: 0;
+    display: flex;          /* Permet d'utiliser flexbox pour le positionnement */
+    flex-direction: column; /* Empile les éléments verticalement */
+    min-height: 100vh;      /* Assure que le body occupe au moins toute la hauteur de la fenêtre */
 }
+
+
 
 h1 {
     text-align: center;
@@ -296,6 +299,32 @@ li {
     margin-top: 0; /* Supprime la marge supérieure par défaut */
     
 }
+.error-message {
+    color: rgb(236, 88, 88);
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+
+.social-icons {
+    display: flex;
+    justify-content: center; /* Centrer les icônes horizontalement */
+    align-items: center;    /* Centrer les icônes verticalement */
+    margin-top: 20px;       /* Espace entre la carte et les icônes */
+}
+
+.social-icons a {
+    margin: 0 10px;          /* Espacement de 1cm entre les icônes */
+}
+
+.social-icons img {
+    width: 40px;             /* Taille des icônes */
+    height: 40px;
+    border-radius: 50%;     /* Forme circulaire */
+    object-fit: cover;      /* Pour que l'image remplisse le cercle */
+}
+
+
 </style>
 </head>
 <body>
