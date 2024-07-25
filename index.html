@@ -371,11 +371,9 @@ li {
 <script>
 const saveButton = document.getElementById('saveButton');
 const depositCard = document.getElementById('depositCard');
-
 const receptionMessage = document.getElementById('receptionMessage');
 const backButton = document.getElementById('backButton');
 const backButtons = document.getElementById('backButtons');
-
 const exchangeIcon = document.querySelector('.exchange-icon');
 const haveSelect = document.getElementById('have');
 const wantSelect = document.getElementById('want');
@@ -384,6 +382,68 @@ const wantAmountInput = document.getElementById('want-amount');
 const exchangeCard = document.getElementById('exchangeCard');
 const receptionCard = document.getElementById('receptionCard');
 const exchangeButton = document.getElementById('exchangeButton');
+let originalHeight = window.innerHeight; // Sauvegarde de la hauteur initiale
+
+
+exchangeButton.addEventListener('click', function () {
+  if (validateAmounts()) {
+    // Les montants sont valides, continuer le processus d'échange
+    const haveAmount = haveAmountInput.value;
+    const wantOption = wantSelect.value;
+    receptionMessage.textContent = `Vous avez demandé à acheter ${haveAmount} ${wantOption.toUpperCase()}. À quelle adresse ${wantOption.toUpperCase()} voulez-vous les recevoir ?`;
+    exchangeCard.style.display = 'none';
+    receptionCard.style.display = 'block';
+  }
+});
+
+function validateAmounts() {
+  const haveAmount = parseFloat(document.getElementById('have-amount').value);
+  const wantAmount = parseFloat(document.getElementById('want-amount').value);
+  const haveError = document.getElementById('have-error');
+  const wantError = document.getElementById('want-error');
+
+  haveError.textContent = ''; // Effacer les messages d'erreur précédents
+  wantError.textContent = '';
+
+  if (isNaN(haveAmount) || haveAmount <= 0) {
+    haveError.textContent = "Veuillez entrer un montant valide supérieur à zéro.";
+    return false;
+  }
+  if (isNaN(wantAmount) || wantAmount <= 0) {
+    wantError.textContent = "Veuillez entrer un montant valide supérieur à zéro.";
+    return false;
+  }
+  return true;
+}
+
+// Gestion de l'affichage du clavier
+window.addEventListener('resize', function() {
+  if (window.innerHeight < originalHeight) { // Clavier ouvert
+    exchangeCard.style.position = 'absolute';
+    exchangeCard.style.top = '50px'; 
+  } else { // Clavier fermé
+    exchangeCard.style.position = 'fixed';
+    exchangeCard.style.top = '50%';
+    exchangeCard.style.transform = 'translate(-50%, -50%)';
+  }
+});
+
+// Gestionnaires d'événements pour les boutons de retour
+backButton.addEventListener('click', () => {
+  receptionCard.style.display = 'none';
+  exchangeCard.style.display = 'block';
+});
+
+backButtons.addEventListener('click', () => {
+  depositCard.style.display = 'none';
+  receptionCard.style.display = 'block';
+});
+
+// Gestionnaire d'événement pour le bouton "Enregistrer"
+saveButton.addEventListener('click', () => {
+  receptionCard.style.display = 'none';
+  depositCard.style.display = 'block';
+});
 
 exchangeIcon.addEventListener('click', () => {
     exchangeIcon.classList.toggle('flipped');
@@ -404,8 +464,7 @@ exchangeIcon.addEventListener('click', () => {
     });
 });
 
-
-
+// Fonction pour mettre à jour les couleurs des bordures en fonction des devises sélectionnées
 function updateInputBorders() {
     const haveValue = haveSelect.value;
     const wantValue = wantSelect.value;
@@ -432,48 +491,12 @@ function updateInputBorders() {
     }
 }
 
-
-exchangeButton.addEventListener('click', () => {
-    const haveAmount = document.getElementById('have-amount').value;
-    const wantOption = document.getElementById('want').value;
-    receptionMessage.textContent = `Vous avez demandé à acheter ${haveAmount} ${wantOption.toUpperCase()}. À quelle adresse ${wantOption.toUpperCase()} voulez-vous les recevoir ?`;
-    exchangeCard.style.display = 'none';
-    receptionCard.style.display = 'block';
-});
-
-backButton.addEventListener('click', () => {
-    receptionCard.style.display = 'none';
-    exchangeCard.style.display = 'block';
-});
-
-backButtons.addEventListener('click', () => {
-    depositCard.style.display = 'none';
-    receptionCard.style.display = 'block';
-
-});
-
-
-saveButton.addEventListener('click', () => {
-    receptionCard.style.display = 'none';
-    depositCard.style.display = 'block';
-});
-
-window.addEventListener('resize', function() {
-  const exchangeCard = document.getElementById('exchangeCard');
-  if (window.innerHeight < originalHeight) { // Le clavier est ouvert
-    exchangeCard.style.position = 'absolute';
-    exchangeCard.style.top = '50px'; // Ajustez la valeur selon vos besoins
-  } else { // Le clavier est fermé
-    exchangeCard.style.position = 'fixed';
-    exchangeCard.style.top = '50%';
-    exchangeCard.style.transform = 'translate(-50%, -50%)';
-  }
-});
-// Appeler la fonction au chargement initial et lors du changement des menus déroulants
+// Appeler updateInputBorders au chargement initial pour définir les bonnes couleurs
 updateInputBorders();
+
+// Ajouter des écouteurs d'événements pour mettre à jour les couleurs lors du changement de devise
 haveSelect.addEventListener('change', updateInputBorders);
 wantSelect.addEventListener('change', updateInputBorders);
-
 </script>
 </body>
 </html>
