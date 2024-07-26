@@ -340,16 +340,18 @@ li {
 
 
 /* Styles pour le header et l'icône de profil */
-header {
+.headerd {
+    
+    color: rgb(255, 255, 255);
     display: flex;       /* Utiliser Flexbox pour l'alignement */
     align-items: center; /* Aligner les éléments verticalement au centre */
     flex-direction: column; /* Empiler les éléments verticalement */
     padding: 15px;
-    background-color: rgba(0, 0, 0, 0.2);
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
+    background-color: #3467f5;
 }
 
 .profile-container {
@@ -425,14 +427,14 @@ margin-bottom: -520px;
 </style>
 </head>
 <body>
-<header>
+<div class="headerd">
     <h1>Afreecash</h1> 
     <div class="profile-container">
         <img src="profil.jfif" alt="Icône de profil" class="profile-icon">
         <span id="telegram-id">UID: </span>
     </div>
     
-</header>
+</div>
     
 </div>
     <div class="background"></div>
