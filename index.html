@@ -24,12 +24,14 @@ html, body {
 
 
 h1 {
+    margin-bottom: 0px;
     text-align: center;
     color: #007bff; /* Bleu */
     min-height: 510px;
 }
 
 p {
+    margin-top: 50px;
     font-size: 13px;
     text-align: center;
     color: #ffffff; /* Bleu */
@@ -40,17 +42,30 @@ h4 {
     margin-bottom: 30px;
     top: 20px;
 }
-h2.depot{
-    position: relative;
-    top: 35px;
-    margin-bottom: 10px;
-}
+
 
 h2 {
     text-align: center;
     color: #ffffff; /* Gris foncé */
     margin-bottom: 30px;
 }
+#receptionCard h2 {
+    margin-top: 5px; /* Environ 0.3 cm */
+    color: white;
+    
+}
+
+
+
+#depositCard h2 {
+    color: rgb(255, 253, 253);
+    position: relative;
+    top: 35px;
+    margin-top: 0; /* Supprime la marge supérieure du titre */
+
+}
+
+
 
 .background {
     position: absolute;
@@ -295,9 +310,7 @@ li {
     color: #ffffff;
     margin-bottom: 2px;  
 }
-#depositCard h2 {
-    margin-top: 5px; /* Environ 0.3 cm */
-}
+
 
 #depositCard .exchange-form-group h3 {
     margin-top: 0; /* Supprime la marge supérieure par défaut */
@@ -329,6 +342,14 @@ li {
 }
 
 
+#receptionCard p, #depositCard p {
+    margin: 5px 0; /* Réduit la marge entre les paragraphes */
+    line-height: 1.2; /* Réduit l'interligne */
+}
+
+#receptionCard .info-icon p, #depositCard .info-icon p {
+    margin: 2px 0; /* Réduit la marge à l'intérieur de info-icon */
+}
 </style>
 </head>
 <body>
@@ -370,29 +391,25 @@ li {
         <button type="submit" id="exchangeButton">Echanger</button>
     </div>
     
-    <div class="exchange-container" id="receptionCard" style="display: none;"> 
+    <div class="exchange-container" id="receptionCard" style="display: none;">
         <h2>ADRESSE DE RÉCEPTION</h2>
-        <p id="receptionMessage"></p> 
+        <p id="receptionMessage"></p>
         <input type="text" id="perfectMoneyAddress" value="" placeholder="Ex: U43952795">
         <button type="submit" id="saveButton">ENREGISTRER</button>
         <div class="info-icon">
             <i class="fas fa-info-circle"></i>
-            <p>Si il s'agit de votre première transaction perfectmoney, demandez l'aide d'un utilisateur expérimenté pour savoir où trouver votre adresse Perfectmoney.
-                Les transactions perfectmoney sont irréversibles. Si vous renseignez une mauvaise adresse, les fonds seront perdus définitivement.
-            </p> 
+            <p>Si il s'agit de votre première transaction , demandez l'aide d'un utilisateur expérimenté pour ne pas fait d'erreur car les transation sont irreversible .</p>
         </div>
         <button class="back-button" id="backButton"><i class="fas fa-arrow-left"></i> Retour</button>
     </div>
-
+    
     <div class="exchange-container" id="depositCard" style="display: none;">
         <h2 class="depot">DÉPÔT</h2>
         <div class="exchange-form-group">
             <h4>PAYER PAR BNB (BEP20)</h4>
             <p>Envoyez 0.023 BNB à l'adresse</p>
             <div class="exchange-input-group">
-                <input type="text" id="depositAddress" value="0xDF2F8FDec40Ee...748c79df22a7898" readonly>
-                <button class="copy-button"><i class="fas fa-copy"></i></button>
-            </div>
+                </div>
         </div>
         <div class="exchange-form-group">
             <p>À la fin du paiement, entrez l'ID de transaction afin de valider le paiement.</p>
@@ -404,8 +421,8 @@ li {
             <p>Envoyez exactement "l'actif ou monaie choie " et le montant exact , sinon vous risquer de pedre vos actifs </p>
         </div>
         <button class="back-button" id="backButtons"><i class="fas fa-arrow-left"></i> Retour</button>
-
     </div>
+    
     <footer>
     <p>Rejoingnez-nous sur nos différentes réseaux sociaux </p>
     <div class="social-icons">
