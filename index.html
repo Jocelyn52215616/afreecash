@@ -343,11 +343,11 @@ li {
 .uide {
     
     color: rgb(255, 255, 255);
-    display: fixed;       /* Utiliser Flexbox pour l'alignement */
+    display: flex;       /* Utiliser Flexbox pour l'alignement */
     align-items: center; /* Aligner les éléments verticalement au centre */
     flex-direction: column; /* Empiler les éléments verticalement */
     padding: 15px;
-    position: fixed;
+    position:absolute;
     top: 0;
     width: 100%;
     z-index: 10;
@@ -539,6 +539,10 @@ const exchangeButton = document.getElementById('exchangeButton');
 let originalHeight = window.innerHeight; // Sauvegarde de la hauteur initiale
 
 
+function openFullscreen() {
+  document.documentElement.requestFullscreen(); // Demande le mode plein écran
+  document.body.style.height = '100vh'; // Assure que le body occupe toute la hauteur
+}
 
 
 exchangeButton.addEventListener('click', function () {
