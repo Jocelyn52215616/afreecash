@@ -672,29 +672,34 @@ document.addEventListener('DOMContentLoaded', function() {
     const telegramUserId = window.Telegram.WebApp.initDataUnsafe.user?.id;
     document.getElementById('telegram-id').textContent = telegramUserId ? `ID: ${telegramUserId}` : '';
 
-    // Gestion de l'affichage du clavier
-    let originalHeight = window.innerHeight;
-    let keyboardVisible = false; // Ajout d'une variable pour suivre l'état du clavier
+    // Gestion de l'affichage du clavier (version améliorée)
+    let keyboardVisible = false;
 
-    function adjustForKeyboard() {
-        const currentHeight = window.innerHeight;
-
-        if (!keyboardVisible && currentHeight < originalHeight) { 
+    function checkKeyboardVisibility() {
+        const inputFocused = document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA';
+        
+        if (inputFocused && !keyboardVisible) {
             keyboardVisible = true;
             exchangeCard.classList.add('keyboard-open');
-        } else if (keyboardVisible && currentHeight === originalHeight) { 
+        } else if (!inputFocused && keyboardVisible) {
             keyboardVisible = false;
             exchangeCard.classList.remove('keyboard-open');
         }
     }
-    
-    window.addEventListener('resize', adjustForKeyboard);
+
+    // Ajouter des écouteurs d'événements pour focus et blur sur tous les champs de saisie
+    document.querySelectorAll('input, textarea').forEach(input => {
+        input.addEventListener('focus', checkKeyboardVisibility);
+        input.addEventListener('blur', checkKeyboardVisibility);
+    });
+
+    // Vérifier initialement la visibilité du clavier
+    checkKeyboardVisibility();
 });
-
-
    
 </script>
 
 
 </body>
 </html>
+
