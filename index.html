@@ -347,10 +347,15 @@ li {
     align-items: center; /* Aligner les éléments verticalement au centre */
     flex-direction: column; /* Empiler les éléments verticalement */
     padding: 15px;
-    position:absolute;
+    position: fixed;  /* Garder le header fixe en haut */
     top: 0;
     width: 100%;
     z-index: 10;
+    transition: top 0.3s ease-in-out; /* Ajouter une transition pour un effet plus fluide */
+}
+
+.exchange-container.keyboard-open ~ header { /* Appliquer le style lorsque le clavier est ouvert et que la carte a la classe 'keyboard-open' */
+    top: -50px; /* Déplacer le header vers le haut pour le cacher */
 }
 
 .profile-container {
@@ -670,12 +675,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (!keyboardVisible && currentHeight < originalHeight) { // Clavier vient de s'ouvrir
             keyboardVisible = true;
-            exchangeCard.style.maxHeight = '80vh';  // Réduire la hauteur maximale pour faire de la place au clavier
+            exchangeCard.classList.add('keyboard-open');
+            exchangeCard.style.maxHeight = '80vh';
         } else if (keyboardVisible && currentHeight === originalHeight) { // Clavier vient de se fermer
             keyboardVisible = false;
-            exchangeCard.style.maxHeight = '90vh';  // Rétablir la hauteur maximale
+            exchangeCard.classList.remove('keyboard-open');
+            exchangeCard.style.maxHeight = '90vh';
         }
     }
+
 
     window.addEventListener('resize', adjustForKeyboard);
     });
