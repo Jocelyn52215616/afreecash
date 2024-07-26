@@ -23,6 +23,24 @@ html, body {
 
 
 
+.profile-container {
+    display: flex;
+    align-items: center;
+}
+
+.profile-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#telegram-id {
+    font-weight: bold;
+    color: white;
+}
+
+
 h1 {
     margin-bottom: 0px;
     text-align: center;
@@ -353,10 +371,10 @@ li {
 </style>
 </head>
 <body>
-    <header>
-        <img src="chemin/vers/votre/icone-profil.png" alt="Icône de profil" class="profile-icon">
-        <span id="telegram-id"></span>
-    </header>
+<div class="profile-container">
+    <img src="profil.jfif" alt="Icône de profil" class="profile-icon">
+    <span id="telegram-id">UID: </span> 
+</div>
     <div class="background"></div>
     <h1>Afreecash</h1> 
     <div class="exchange-container" id="exchangeCard">
@@ -374,7 +392,7 @@ li {
             <p id="have-error" class="error-message"></p> 
         </div>
         <div class="exchange-icon">
-            <img src="chemin/vers/votre/logo-echange.png" alt="Logo échange">
+            <img src="iconu.png" alt="Logo échange">
         </div>
     
         <div class="exchange-form-group">
