@@ -555,29 +555,7 @@ wantSelect.addEventListener('change', updateInputBorders);
 
 
 
-// Récupération et affichage de l'ID Telegram (à placer après le chargement du DOM)
-document.addEventListener('DOMContentLoaded', function() {
-    const telegramUserId = window.Telegram.WebApp.initDataUnsafe.user?.id;
-    document.getElementById('telegram-id').textContent = telegramUserId ? `ID: ${telegramUserId}` : '';
 
-    // Gestion de l'affichage du clavier
-    let originalHeight = window.innerHeight;
-    let keyboardVisible = false; // Ajout d'une variable pour suivre l'état du clavier
-
-    function adjustForKeyboard() {
-        const currentHeight = window.innerHeight;
-
-        if (!keyboardVisible && currentHeight < originalHeight) { // Clavier vient de s'ouvrir
-            keyboardVisible = true;
-            exchangeCard.style.maxHeight = '80vh';  // Réduire la hauteur maximale pour faire de la place au clavier
-        } else if (keyboardVisible && currentHeight === originalHeight) { // Clavier vient de se fermer
-            keyboardVisible = false;
-            exchangeCard.style.maxHeight = '90vh';  // Rétablir la hauteur maximale
-        }
-    }
-
-    window.addEventListener('resize', adjustForKeyboard);
-    });
 </script>
 
 
