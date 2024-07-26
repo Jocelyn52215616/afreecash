@@ -45,7 +45,6 @@ h1 {
     margin-bottom: 0px;
     text-align: center;
     color: #007bff; /* Bleu */
-    min-height: 510px;
 }
 
 p {
@@ -341,22 +340,72 @@ li {
 }
 
 
+/* Styles pour le header et l'icône de profil */
+header {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10; /* Assure que le header reste au-dessus */
+}
+
+.profile-container {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0; /* Empêche l'icône de rétrécir */
+}
+
+.profile-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+#telegram-id {
+    font-weight: bold;
+    color: white;
+    white-space: nowrap; /* Empêche le texte de passer à la ligne */
+}
+
+/* Styles pour les icônes sociales */
+footer {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 15px 0;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    z-index: 10; /* Assure que le footer reste au-dessus */
+}
+
 .social-icons {
     display: flex;
-    justify-content: center; /* Centrer les icônes horizontalement */
-    align-items: center;    /* Centrer les icônes verticalement */
-    margin-top: 20px;       /* Espace entre la carte et les icônes */
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Permet aux icônes de passer à la ligne si nécessaire */
 }
 
 .social-icons a {
-    margin: 0 10px;          /* Espacement de 1cm entre les icônes */
+    margin: 5px;  /* Espacement réduit pour les écrans plus petits */
+    flex: 0 0 auto; /* Les icônes ne grandiront pas pour remplir l'espace */
 }
 
 .social-icons img {
-    width: 40px;             /* Taille des icônes */
-    height: 40px;
-    border-radius: 50%;     /* Forme circulaire */
-    object-fit: cover;      /* Pour que l'image remplisse le cercle */
+    width: 30px; /* Taille réduite pour les écrans plus petits */
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Media Queries pour ajuster la taille des icônes sur les petits écrans */
+@media (max-width: 480px) {
+    .social-icons img {
+        width: 25px;
+        height: 25px;
+    }
 }
 
 
@@ -371,12 +420,15 @@ li {
 </style>
 </head>
 <body>
+<header>   
 <div class="profile-container">
     <img src="profil.jfif" alt="Icône de profil" class="profile-icon">
-    <span id="telegram-id">UID: </span> 
+    <span id="telegram-id">UID: </span>
+    <h1>Afreecash</h1> 
+
+</header>  
 </div>
     <div class="background"></div>
-    <h1>Afreecash</h1> 
     <div class="exchange-container" id="exchangeCard">
         <h2>Exchange</h2>
     
