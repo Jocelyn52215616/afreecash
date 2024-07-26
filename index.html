@@ -42,9 +42,8 @@ html, body {
 
 
 h1 {
-    margin-bottom: 0px;
+    margin: 0;
     text-align: center;
-    color: #007bff; /* Bleu */
 }
 
 p {
@@ -342,14 +341,15 @@ li {
 
 /* Styles pour le header et l'icône de profil */
 header {
-    display: flex;
-    align-items: center;
+    display: flex;       /* Utiliser Flexbox pour l'alignement */
+    align-items: center; /* Aligner les éléments verticalement au centre */
+    flex-direction: column; /* Empiler les éléments verticalement */
     padding: 15px;
     background-color: rgba(0, 0, 0, 0.2);
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 10; /* Assure que le header reste au-dessus */
+    z-index: 10;
 }
 
 .profile-container {
@@ -374,11 +374,12 @@ header {
 /* Styles pour les icônes sociales */
 footer {
     background-color: rgba(0, 0, 0, 0.2);
-    padding: 15px 0;
+    padding: 1px 0;        /* Réduit le padding vertical */
     width: 100%;
     position: fixed;
     bottom: 0;
-    z-index: 10; /* Assure que le footer reste au-dessus */
+    z-index: 10;
+    margin-top: 100px; /* Ajuste cette valeur pour contrôler la distance avec la carte */
 }
 
 .social-icons {
@@ -417,16 +418,22 @@ footer {
 #receptionCard .info-icon p, #depositCard .info-icon p {
     margin: 2px 0; /* Réduit la marge à l'intérieur de info-icon */
 }
+
+.socialgroup {
+margin-bottom: -520px;
+}
 </style>
 </head>
 <body>
-<header>   
-<div class="profile-container">
-    <img src="profil.jfif" alt="Icône de profil" class="profile-icon">
-    <span id="telegram-id">UID: </span>
+<header>
     <h1>Afreecash</h1> 
-
-</header>  
+    <div class="profile-container">
+        <img src="profil.jfif" alt="Icône de profil" class="profile-icon">
+        <span id="telegram-id">UID: </span>
+    </div>
+    
+</header>
+    
 </div>
     <div class="background"></div>
     <div class="exchange-container" id="exchangeCard">
@@ -492,8 +499,7 @@ footer {
         </div>
         <button class="back-button" id="backButtons"><i class="fas fa-arrow-left"></i> Retour</button>
     </div>
-    
-    <footer>
+<div class="socialgroup">
     <p>Rejoingnez-nous sur nos différentes réseaux sociaux </p>
     <div class="social-icons">
         <a href="lien_vers_facebook" target="_blank">
@@ -506,7 +512,11 @@ footer {
             <img src="spport.png" alt="Instagram">
         </a>
     </div>
+</div>
+<footer>
+
 </footer>
+ 
     
 
 </body>
