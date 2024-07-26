@@ -350,10 +350,13 @@ li {
     top: 0;
     width: 100%;
     z-index: 10;
+}
+
+.uide {
     transition: top 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Transition pour un effet fluide */
 }
 
-.exchange-container.keyboard-open ~ .uide {
+.exchange-container.keyboard-open ~ .uide { /* Remplacer header par .uide */
     top: -50px; /* Déplacer vers le haut pour cacher */
     opacity: 0;   /* Rendre transparent */
 }
